@@ -1,0 +1,9 @@
+<config>
+    <modules>
+        <AW_FPS>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>0.9.1</version>
+        </AW_FPS>
+    </modules>
+</config>
