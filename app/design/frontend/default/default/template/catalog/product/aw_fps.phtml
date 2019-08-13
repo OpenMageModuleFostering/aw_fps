@@ -1,0 +1,219 @@
+<div id="aw_iss"></div>
+<div id="aw_preloading_images" style="height:1px; width:1px; visibility:hidden;"></div>
+<script language="javascript">
+
+
+<?php
+
+$fps = Mage::helper('awfps')->getFeaturedProducts();
+
+$aw_iss_data = 'var aw_iss_data=[';
+$i = 1;
+foreach($fps as $fp){
+	echo "var aw_iss_fp_$i=['".$fp['url']."', '".$fp['title']."', '".$fp['price']."', '".$fp['image']."'];\n";
+	$aw_iss_data .= "aw_iss_fp_$i,";
+	$i++;
+}
+$aw_iss_data = chop($aw_iss_data, ',');
+$aw_iss_data .= "];";
+echo $aw_iss_data;
+
+/*var aw_iss_fp_1=['10','Flash 5 for Windows and Macintosh','59.99','10'];
+var aw_iss_fp_2=['70','Javascript (Definitive Guide)','39.50','70'];
+var aw_iss_fp_3=['182','Hunting Knife w/sheath','250.00','182'];
+var aw_iss_fp_4=['16123','PATRICK Maracana HG Cleats','41.95','16123'];
+var aw_iss_data=[aw_iss_fp_1,aw_iss_fp_2,aw_iss_fp_3,aw_iss_fp_4];
+*/
+
+?>
+
+
+// Parameters
+
+var aw_fontColor = '#000000';
+var aw_fontSize = '11px';
+var aw_fontFamily = 'Arial';
+
+var aw_bgColor = '#FFFFFF';
+
+var aw_borderColor = '#000000';
+var aw_borderSize = '1px'; //in pixels
+var aw_borderStyle = 'solid';
+
+var aw_padding = '1px 1px 1px 1px'; // paddings `top right bottom left` in pixels or 0 0 0 0 (without);
+
+var aw_rotateTime = 3000; // in millisec (1 sec = 1000 millisec)
+
+
+// Parameters
+
+/// FROM Q
+$cache = []; // All objects. for cache
+$uid = []; // All objects by uid
+
+$ = function(id){
+//getElementById and extend it
+// use cache if available
+	var obj = null;
+	if(typeof id == 'string'){
+		if(!$cache[id]){
+			if(!(obj = document.getElementById(id)))
+				return false;
+		}else{ obj = $cache[id]; }
+	}else{ obj = id;}
+	if(obj && !obj.alreadyExtended){
+		obj.alreadyExtended = true;
+		obj.$S = function(o){
+			for(var i in o){
+				obj.style[i] = o[i];
+				if(i=='opacity' && document.all &&!window.opera){
+					var oAlpha = obj.filters['DXImageTransform.Microsoft.alpha'] || obj.filters.alpha || false;
+					if (oAlpha) oAlpha.opacity = o[i]*100;
+					else obj.style.filter += "progid:DXImageTransform.Microsoft.Alpha(opacity="+o[i]*100+")";
+				}
+			}
+		}
+	}
+	return obj;
+}
+// Mutagen - FX handling library. Part of Q-framework.
+
+Mutation = function(el){
+	this.element = el;
+	this.FPS = 30;
+	this.duration = 1500;
+	this.framesCount = 0;
+	this.movies = [];
+	this.onPlay = function(){};
+}
+
+Mutation.prototype.set = function(from, to, frames){
+	for(var i in from){
+		var muta = new Mutagen();
+		if(muta['__'+i]){
+			muta['__'+i](from[i], to[i], frames);
+			this.movies.push(muta.movie);
+		}
+	}
+}
+
+Mutation.prototype.play = function(){
+	var interval = Math.round(1000/this.FPS);
+	var self = this;
+	var length = this.movies[0].length;
+	for(var i=0; i< length; i++){
+		for(var k=0; k< this.movies.length;k++){
+			var func = function(obj, style){
+				return function(){
+					obj.$S(style);
+				}
+			}(this.element, this.movies[k][i]);
+			setTimeout(func, interval*i);
+		}
+	}
+	setTimeout(self.onPlay, interval*length);
+}
+
+Mutagen = function(){
+	this.movie = [];
+}
+
+Mutagen.prototype.__opacity = function(from, to, frames){
+	to = parseFloat(to);
+	from = parseFloat(from);
+	var delta = (to-from)/frames;
+	var h = from;
+	for(var i=0;i<frames;i++){
+		h += delta;
+		this.movie.push({opacity: Math.round(h*100)/100});
+	}
+}
+///-FROM Q
+//Preloading pics
+var imgPreloadBlock = '';
+for(var i=0;i<aw_iss_data.length;i++){
+	imgPreloadBlock = imgPreloadBlock + '<img src="'+aw_iss_data[i][3]+'" height=0 width=0>';
+	(new Image(1,1)).src = aw_iss_data[i][3];
+}
+document.getElementById('aw_preloading_images').innerHTML = imgPreloadBlock;
+window.onload = function(){
+	// Start operations with dom only on window load
+	mouseFollowedDiv = document.createElement('div');
+	document.body.appendChild(mouseFollowedDiv);
+	mouseFollowedDiv.style.position = 'absolute';
+	mouseFollowedDiv.style.border = aw_borderSize+' '+aw_borderStyle+' '+aw_borderColor;
+	mouseFollowedDiv.style.backgroundColor = aw_bgColor;
+	mouseFollowedDiv.style.display = 'none';
+	mouseFollowedDiv.style.font = aw_fontSize+' '+aw_fontFamily;
+    mouseFollowedDiv.style.color = aw_fontColor;
+    mouseFollowedDiv.style.padding = aw_padding;
+    
+	var __captureCoord = function(){
+	//x-browser capture coordinates function
+		if(!document.all){
+			return function(e){
+			// gecko|opera|safari
+				var x =  e.clientX;
+				var y = e.clientY;
+				var newX = x +20 + window.pageXOffset+'px';
+				var newY =  y +20+ window.pageYOffset+'px';
+				var func = function(){
+					mouseFollowedDiv.style.left = newX
+					mouseFollowedDiv.style.top = newY;
+				}
+				var intId = setTimeout(func, 5);
+			}
+		}else{
+			if(navigator.appVersion.match('6')){
+			// ie 6
+				return function(){
+					mouseFollowedDiv.style.left = event.clientX +20 + document.body.scrollLeft +'px';
+					mouseFollowedDiv.style.top = event.clientY +20 + document.body.scrollTop+'px';
+				}
+			}else return function(){
+			// ie 7
+				mouseFollowedDiv.style.left = event.clientX + 20 + document.documentElement.scrollLeft +'px';
+				mouseFollowedDiv.style.top = event.clientY + 20 + document.documentElement.scrollTop+'px';
+			}
+		}
+	}
+	document.body.onmousemove = __captureCoord();
+	imgContainer = $('aw_iss');
+	imgContainer.onmouseover = function(){this.paused = true; mouseFollowedDiv.style.display = ''};
+	imgContainer.onmouseout = function(){this.paused = false; mouseFollowedDiv.style.display = 'none'};
+	// First element might be preloaded
+	imgContainer.innerHTML = '<a id="rotator_url" href="'+aw_iss_data[0][0]+'"><img id="rotator" src="' + aw_iss_data[0][3] + '" /></a>';
+	mouseFollowedDiv.innerHTML = aw_iss_data[0][1]+'<br/>'+aw_iss_data[0][2];
+	imgContainer.currentIndex = 0;
+	
+	var muta = new Mutation($('rotator'));
+	muta.set({opacity:'1'},{opacity:'0'},15);
+	var muta2 = new Mutation($('rotator'));
+	muta2.set({opacity:'0'},{opacity:'1'},45);
+	
+	var imgRotator = function(){
+		if(!imgContainer.paused){
+			
+			muta.onPlay = function(){
+				imgContainer.currentIndex = (imgContainer.currentIndex!==null && imgContainer.currentIndex<aw_iss_data.length-1) ? imgContainer.currentIndex+1:0;
+				$('rotator_url').href = aw_iss_data[imgContainer.currentIndex][0];
+				op_fl = 0;
+				$('rotator').onload = function(){
+					muta2.play();
+					op_fl =1;
+				}
+				
+				
+				$('rotator').src = aw_iss_data[imgContainer.currentIndex][3];
+				if(window.opera && !op_fl)
+					muta2.play()
+				mouseFollowedDiv.innerHTML = aw_iss_data[imgContainer.currentIndex][1]+'<br/>'+aw_iss_data[imgContainer.currentIndex][2];
+			};
+			muta.play();
+		}
+	}
+	setInterval(imgRotator, aw_rotateTime);
+}
+
+
+</script>

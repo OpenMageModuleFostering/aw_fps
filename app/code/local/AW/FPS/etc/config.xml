@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <AW_FPS>
+          <version>0.9</version>
+       </AW_FPS>
+    </modules>
+ 
+    <global>
+        <models>
+            <awfps>
+                <class>AW_FPS_Model</class>
+            </awfps>
+        </models>
+
+        <helpers>
+        	<awfps>
+        		<class>AW_FPS_Helper</class>
+        	</awfps>
+        </helpers>
+        
+        <resources>
+            <awfps_setup>
+                <setup>
+                    <module>AW_FPS</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </awfps_setup>
+            <awfps_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </awfps_write>
+            <awfps_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </awfps_read>
+        </resources>
+    </global>
+</config>
