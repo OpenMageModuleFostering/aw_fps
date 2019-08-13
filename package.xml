@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>AW_FPS</name>
-    <version>0.9.4</version>
+    <version>0.9.5</version>
     <stability>stable</stability>
     <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSL 3.0</license>
     <channel>community</channel>
@@ -15,8 +15,8 @@
 on any page with the help of Magento CMS. After this done, go to Admin-&gt;Catalog-&gt;Manage Products-&gt;edit a product and set "Rotate in featured products slideshow" to "Yes". Navigate to the page in which you inserted the block above and enjoy the slideshow.</notes>
     <authors><author><name>Artyom</name><user>auto-converted</user><email>rabzonov@aheadworks.com</email></author></authors>
     <date>2008-12-12</date>
-    <time>15:31:24</time>
-    <contents><target name="magelocal"><dir name="AW"><dir name="FPS"><dir name="etc"><file name="config.xml" hash="8dda111d1f89d8136cbf0159039a4ec9"/><file name="system.xml" hash="74056d139edd1081d409305f98b046b4"/></dir><dir name="Helper"><file name="Data.php" hash="46aea6822074dd2f08f23018f49c13f4"/></dir><dir name="Model"><dir name="Entity"><dir name="Attribute"><dir name="Backend"><dir name="Boolean"><file name="Config.php" hash="faa1167c170738331125551ddc1a2e8c"/></dir></dir><dir name="Source"><dir name="Boolean"><file name="Config.php" hash="75a97e221006157620840c7c34e71506"/></dir></dir></dir></dir></dir><dir name="sql"><dir name="awfps_setup"><file name="mysql4-install-0.9.4.php" hash="e6742522f0be7e0d3b93bb8b9d285aea"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="default"><dir name="default"><dir name="template"><dir name="catalog"><dir name="product"><file name="aw_fps.phtml" hash="387667398ffad6b95494bbde9e0d24d3"/></dir></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="AW_FPS.xml" hash="17d222a04de3cf7f10e293104a7891be"/></dir></target></contents>
+    <time>15:33:04</time>
+    <contents><target name="magelocal"><dir name="AW"><dir name="FPS"><dir name="etc"><file name="config.xml" hash="5258d2bd1b6d44f2637746600a706c6f"/><file name="system.xml" hash="74056d139edd1081d409305f98b046b4"/></dir><dir name="Helper"><file name="Data.php" hash="46aea6822074dd2f08f23018f49c13f4"/></dir><dir name="Model"><dir name="Entity"><dir name="Attribute"><dir name="Backend"><dir name="Boolean"><file name="Config.php" hash="faa1167c170738331125551ddc1a2e8c"/></dir></dir><dir name="Source"><dir name="Boolean"><file name="Config.php" hash="75a97e221006157620840c7c34e71506"/></dir></dir></dir></dir></dir><dir name="sql"><dir name="awfps_setup"><file name="mysql4-install-0.9.5.php" hash="e6742522f0be7e0d3b93bb8b9d285aea"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="default"><dir name="default"><dir name="template"><dir name="catalog"><dir name="product"><file name="aw_fps.phtml" hash="387667398ffad6b95494bbde9e0d24d3"/></dir></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="AW_FPS.xml" hash="17d222a04de3cf7f10e293104a7891be"/></dir></target></contents>
     <compatible/>
     <dependencies/>
 </package>
