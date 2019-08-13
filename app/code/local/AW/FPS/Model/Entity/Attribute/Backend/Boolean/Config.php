@@ -48,16 +48,17 @@ class AW_FPS_Model_Entity_Attribute_Backend_Boolean_Config extends Mage_Eav_Mode
     	$product_id = $object->getData('entity_id');
     	
     	$code = $object->getData($this->getAttribute()->getAttributeCode());
+    	$table = Mage::getSingleton('core/resource')->getTableName('aw_fps');
         if($code == 0) {
             $object->unsData($this->getAttribute()->getAttributeCode());
             //remove product ID
-            $write->query("DELETE FROM aw_fps WHERE product_id='$product_id'");
+            $write->query("DELETE FROM $table WHERE product_id='$product_id'");
         }
         else{
         	//add project ID to the rotation
-        	$r = $write->fetchRow("SELECT * FROM aw_fps WHERE product_id='$product_id'");
+        	$r = $write->fetchRow("SELECT * FROM $table WHERE product_id='$product_id'");
         	if(!$r)
-      			$write->query("INSERT INTO aw_fps (product_id) VALUE ($product_id)");
+      			$write->query("INSERT INTO $table (product_id) VALUE ($product_id)");
         }
     }
 
