@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/AW_FPS",
+    "name": "OpenMageModuleFostering\/AW_FPS",
     "type": "magento-module",
     "license": "OSL-3.0",
     "homepage": "",
     "description": "Featured Products Slideshow",
     "authors": [
-    {
-        "name": "Artyom",
-        "email": "rabzonov@aheadworks.com"
-    }
-],
+        {
+            "name": "Artyom",
+            "email": "rabzonov@aheadworks.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
